@@ -77,6 +77,10 @@ plus renovation framing, patch &amp; repair, attic/basement insulation and light
 * Mobile drawer: focus trap, `Escape` to close, scroll lock, `aria-expanded` / `aria-hidden`
   kept in sync, and focus returned to the toggle.
 * All rendered text meets **WCAG AA** contrast (checked programmatically).
+* Hero copy sits on a two-layer scrim (a full-bleed veil plus a feathered plate
+  behind the copy block) so the headline stays legible over the photograph at every
+  width — verified by diffing the real composited pixels behind each text block,
+  not just the declared CSS colours (worst case 7.2:1).
 * Tap targets are ≥ 40px on mobile; the persistent call/quote bar respects `safe-area-inset-bottom`.
 * `scroll-padding-top` offsets anchor jumps under the fixed header; the active nav link
   tracks the section in view.

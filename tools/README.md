@@ -25,5 +25,6 @@ python3 tools/brand_assets.py
 | `shots.js` | Section screenshots at a given width. `W=390 H=844 DPR=2 node tools/shots.js` |
 | `audit.js` | Sweeps 14 viewport widths for horizontal overflow, console errors, failed requests, broken images, heading order, unlabelled fields and duplicate `h1`s. |
 | `contrast.js` | Measures WCAG contrast for every rendered text node and reports anything under AA. |
+| `hero-legibility.mjs` | Renders the hero twice (text on / text off) and diffs the pixels, so contrast is measured against the *real* composited photograph + scrim behind the headline. Scores glyph cores only. |
 
 Both browser scripts drive Puppeteer with a local Chromium build.

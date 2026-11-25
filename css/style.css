@@ -118,7 +118,8 @@ section{position:relative}
   margin-bottom:1.1rem;
 }
 .eyebrow .rule{display:block;width:1.9rem;height:1px;background:var(--line-strong)}
-.eyebrow-light{color:rgba(242,240,235,.62)}
+.eyebrow-light{color:rgba(242,240,235,.9)}
+.hero .eyebrow-light{text-shadow:0 1px 14px rgba(8,9,9,.6)}
 .eyebrow-light .rule{background:var(--accent)}
 
 /* ---------- Buttons ---------- */
@@ -297,23 +298,29 @@ body.nav-open{overflow:hidden}
   isolation:isolate;
   overflow:hidden;
 }
-.hero-media{position:absolute;inset:0;z-index:-2}
+.hero-media{position:absolute;inset:0;z-index:0}
 .hero-media picture,.hero-media img{width:100%;height:100%}
 .hero-media img{object-fit:cover;object-position:58% 50%;filter:grayscale(.18) contrast(1.02)}
+/* the scrim must paint above the photograph, never behind it */
 .hero-veil{
-  position:absolute;inset:0;z-index:-1;
+  position:absolute;inset:0;z-index:1;
   background:
-    linear-gradient(180deg,rgba(10,11,11,.86) 0%,rgba(10,11,11,.42) 30%,rgba(10,11,11,.62) 60%,rgba(10,11,11,.96) 100%),
-    linear-gradient(90deg,rgba(10,11,11,.8) 0%,rgba(10,11,11,.44) 52%,rgba(10,11,11,.16) 100%);
+    linear-gradient(180deg,rgba(8,9,9,.78) 0%,rgba(8,9,9,.26) 22%,rgba(8,9,9,.52) 58%,rgba(8,9,9,.96) 100%),
+    linear-gradient(99deg,rgba(8,9,9,.86) 0%,rgba(8,9,9,.62) 42%,rgba(8,9,9,.24) 78%,rgba(8,9,9,.08) 100%);
 }
-.hero-copy{position:relative}
+.hero-copy{position:relative;z-index:3}
+/* scrim is a real layer under the text — z-index:-1 would sink it below the
+   parent background and paint over the headline */
 .hero-copy::before{
-  content:"";position:absolute;z-index:-1;
-  inset:-3rem -2rem -2.5rem -2.5rem;
-  background:radial-gradient(125% 92% at 4% 62%,rgba(10,11,11,.78) 0%,rgba(10,11,11,.55) 42%,rgba(10,11,11,0) 76%);
+  content:"";position:absolute;z-index:0;
+  inset:-1.75rem -3rem -2rem -3rem;
+  background:
+    radial-gradient(140% 108% at 6% 50%,rgba(6,7,7,.74) 0%,rgba(6,7,7,.58) 46%,rgba(6,7,7,.2) 78%,rgba(6,7,7,0) 100%);
   pointer-events:none;
 }
+.hero-copy > *{position:relative;z-index:1}
 .hero-grid{
+  position:relative;z-index:2;
   display:flex;flex-direction:column;gap:2rem;
   padding-bottom:.5rem;
 }
@@ -328,8 +335,9 @@ body.nav-open{overflow:hidden}
 }
 .hero-title .ht-line{display:block;overflow:hidden;padding-bottom:.02em}
 .hero-title .ht-accent{color:var(--accent)}
-.hero-copy{text-shadow:0 1px 24px rgba(10,11,11,.55),0 0 2px rgba(10,11,11,.5)}
-.hero-title{text-shadow:0 2px 40px rgba(10,11,11,.5)}
+/* keep the copy in one paint layer so glyphs always sit on top of the scrim */
+.hero-copy{isolation:isolate;text-shadow:0 1px 18px rgba(8,9,9,.45)}
+.hero-title{text-shadow:0 2px 32px rgba(8,9,9,.38);isolation:auto}
 .hero-sub-line,.ht-sub{
   display:block;
   font-family:var(--font-body);
@@ -353,9 +361,9 @@ body.nav-open{overflow:hidden}
 .hero-actions{display:flex;flex-wrap:wrap;gap:.65rem;margin-top:1.75rem}
 .hero-actions .btn{flex:1 1 auto}
 .hero-facts{
+  position:relative;z-index:3;
   display:grid;grid-template-columns:repeat(3,1fr);
   gap:.65rem 1rem;
-  position:relative;
   padding:1.1rem 0 0;
   margin-top:.25rem;
 }
@@ -824,8 +832,8 @@ body.nav-open .float-actions{transform:translateY(115%)}
   .hero-media img{object-position:56% 46%}
   .hero-veil{
     background:
-      linear-gradient(180deg,rgba(10,11,11,.72) 0%,rgba(10,11,11,.18) 32%,rgba(10,11,11,.34) 62%,rgba(10,11,11,.9) 100%),
-      linear-gradient(90deg,rgba(10,11,11,.68) 0%,rgba(10,11,11,.34) 46%,rgba(10,11,11,.04) 78%);
+      linear-gradient(180deg,rgba(8,9,9,.9) 0%,rgba(8,9,9,.5) 26%,rgba(8,9,9,.42) 62%,rgba(8,9,9,.94) 100%),
+      linear-gradient(104deg,rgba(8,9,9,.9) 0%,rgba(8,9,9,.76) 32%,rgba(8,9,9,.34) 64%,rgba(8,9,9,.08) 100%);
   }
   .hero-grid{
     display:flex;flex-direction:column;justify-content:flex-end;
@@ -833,8 +841,8 @@ body.nav-open .float-actions{transform:translateY(115%)}
   }
   .hero-copy{max-width:min(46rem,62%)}
   .hero-copy::before{
-    inset:-4rem -6rem -3rem -6rem;
-    background:radial-gradient(120% 100% at 2% 55%,rgba(10,11,11,.7) 0%,rgba(10,11,11,.4) 46%,rgba(10,11,11,0) 74%);
+    inset:-4rem -7rem -3rem -7rem;
+    background:radial-gradient(118% 104% at 2% 52%,rgba(6,7,7,.62) 0%,rgba(6,7,7,.42) 48%,rgba(6,7,7,.1) 82%,rgba(6,7,7,0) 100%);
   }
   .hero-title{max-width:12ch}
   .hero-lede{max-width:40ch;font-size:1.15rem}
